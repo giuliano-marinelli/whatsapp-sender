@@ -27,8 +27,3 @@ chrome.contextMenus.onClicked.addListener(function (info, tab) {
 
     });
 });
-
-chrome.storage.sync.get(["phonesList"]).then((result) => {
-    console.log(result);
-    console.log(result.phonesList.length > 0);
-});
