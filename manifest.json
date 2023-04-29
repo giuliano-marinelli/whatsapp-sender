@@ -1,0 +1,23 @@
+{
+    "name": "WhastsApp Direct Message",
+    "description": "Send WhastsApp Messages without having the contact.",
+    "version": "1.0",
+    "manifest_version": 3,
+    "action": {
+        "default_popup": "options.html",
+        "default_icon": "icon16.png"
+    },
+    "permissions": [
+        "storage",
+        "activeTab",
+        "contextMenus",
+        "tabs"
+    ],
+    "icons": {
+        "16": "icon16.png"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "options_page": "options.html"
+}
