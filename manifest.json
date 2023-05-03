@@ -1,6 +1,6 @@
 {
-    "name": "WhastsApp Direct Message",
-    "description": "Send WhastsApp Messages without having the contact.",
+    "name": "WhatsApp Direct Message",
+    "description": "Send WhatsApp Messages without having the contact.",
     "version": "1.0",
     "manifest_version": 3,
     "action": {
