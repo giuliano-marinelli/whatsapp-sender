@@ -16,13 +16,11 @@ chrome.contextMenus.onClicked.addListener(function (info, tab) {
         }
 
         chrome.storage.sync.get(["phonesList"]).then((result) => {
-            console.log(result);
             var phonesList = result.phonesList ? result.phonesList : [];
             if (!phonesList.includes(phoneNumber)) {
                 phonesList.push(phoneNumber);
                 chrome.storage.sync.set({ "phonesList": phonesList });
             }
-            console.log(phonesList);
         });
 
     });

@@ -11,7 +11,10 @@ chrome.storage.sync.get(["phonesList"]).then((result) => {
 });
 
 chrome.storage.onChanged.addListener((changes, namespace) => {
-    if (changes.countryCode) document.getElementById("country-code").value = changes.countryCode.newValue ? parseInt(changes.countryCode.newValue) : 54;
+    if (changes.countryCode) {
+        document.getElementById("country-code").value = changes.countryCode.newValue ? parseInt(changes.countryCode.newValue) : 54;
+        document.getElementById("phone-send-number").placeholder = "(+" + document.getElementById("country-code").value + ") 123-45-678";
+    }
     if (changes.phonesList) updatePhoneHistory(changes.phonesList.newValue);
 });
 
@@ -19,12 +22,12 @@ function updatePhoneHistory(phonesList) {
     if (phonesList && phonesList.length > 0) {
         var phonesListHtml = "";
         phonesList.forEach(phone => {
-            phonesListHtml += `
+            phonesListHtml = `
             <div class="phone">
-                <i class="fa fa-phone"></i>+` + phone + `
+                <i class="fa fa-phone"></i>+<span>` + phone + `</span>
                 <button id="phone-remove-` + phone + `" data-phone="` + phone + `"><i class="fa fa-fw fa-remove" title="Remove phone"></i></button>
                 <button id="phone-send-` + phone + `" data-phone="` + phone + `"><i class="fa fa-fw fa-send" title="Send message"></i></button>
-            </div>`;
+            </div>` + phonesListHtml;
         });
         document.getElementById("phones-history").classList.remove("empty-phones");
         document.getElementById("phones-history").innerHTML = phonesListHtml;
@@ -67,4 +70,19 @@ function sendMessage(phoneNumber) {
         url: "https://api.whatsapp.com/send/?phone=" + phoneNumber,
         selected: true
     });
+
+    chrome.storage.sync.get(["phonesList"]).then((result) => {
+        var phonesList = result.phonesList ? result.phonesList : [];
+        if (!phonesList.includes(phoneNumber)) {
+            phonesList.push(phoneNumber);
+            chrome.storage.sync.set({ "phonesList": phonesList });
+        }
+    });
 }
+
+document.getElementById("phone-send").addEventListener("click", () => {
+    chrome.storage.sync.get(["countryCode"]).then((result) => {
+        var phoneNumber = (result.countryCode ? parseInt(result.countryCode) : 54) + document.getElementById("phone-send-number").value.replace(/\D/g, '');
+        sendMessage(phoneNumber);
+    });
+});

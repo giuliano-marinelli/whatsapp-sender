@@ -1,6 +1,6 @@
 {
     "name": "WhatsApp Direct Message",
-    "description": "Send WhatsApp Messages without having the contact.",
+    "description": "Select a phone number from a page, press right click and start a chat on WhatsApp™ without saving a new contact.",
     "version": "1.0",
     "manifest_version": 3,
     "action": {
@@ -9,9 +9,7 @@
     },
     "permissions": [
         "storage",
-        "activeTab",
-        "contextMenus",
-        "tabs"
+        "contextMenus"
     ],
     "icons": {
         "16": "icon16.png"
