@@ -1,7 +1,7 @@
 {
     "name": "WhatsApp Direct Message",
     "description": "Select a phone number from a page, press right click and start a chat on WhatsApp™ without saving a new contact.",
-    "version": "1.0",
+    "version": "1.01",
     "manifest_version": 3,
     "action": {
         "default_popup": "options.html",
@@ -12,7 +12,9 @@
         "contextMenus"
     ],
     "icons": {
-        "16": "icon16.png"
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
     },
     "background": {
         "service_worker": "background.js"
